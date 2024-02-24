@@ -1,17 +1,17 @@
 # Programming Assignment 1
-## Many Time Pad
 
-### General idea
-- When 2 ciphertexts encrypted with the same stream cipher key are XORed, the key gets *cancelled* out, and the XOR of 2 plaintexts is obtained.
-- ASCII format, when 2 of such texts are XORed, chances that 2 spaces are in the same place is low.
-- An ASCII `space` has the value of 32, which is also the distance between a letter's uppercase and lowercase
-- As such, when XORing 2 plaintexts, the case of the text is flipped where a space meets a letter
-- We can obtain the key by XORing a ciphertext with it's corresponding plaintext, so by doing frequency analysis on the pairs of XORed ciphers, we can obtain parts of the key.
+## Concept
+The general idea behind this assignment is as follows:
+- When two ciphertexts encrypted with the same stream cipher key are XORed together, the key gets cancelled out, resulting in the XOR of the two plaintexts.
+- In ASCII format, when two such texts are XORed, the chances of two `space`s being in the same place are low.
+- An ASCII `space` has the value of 32, which is also the distance between a letter's uppercase and lowercase.
+- Therefore, when XORing two plaintexts, the case of the text is flipped where a space meets a letter.
+- We can obtain the key by XORing a ciphertext with its corresponding plaintext. By performing frequency analysis on the pairs of XORed ciphers, we can obtain parts of the key.
 
-### Implementation
+## Implementation
 [Source code](./1.py)
 
-### Result
+## Result
 
 **Key:**
 ```
@@ -19,7 +19,7 @@
 ```
 **Decrypted ciphertext:**
 ```
-The secuet-mes_age_is: Wh__ usi|g __str_am cipher, nev___use th_ k_y _ore than onc_
+The secuet mes_age_is: Whtn using aa~tream cipher, never_use the key more than once
 ```
 
 Message: `The secret message is: When using stream cipher, never use the key more than once`

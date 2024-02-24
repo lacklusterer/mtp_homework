@@ -26,32 +26,38 @@ def score_space(block:list):
 
 # main
 
-key = list(b'0'*110)
+key = list(b'0'*100)
+score_space_plaintexts = []
 
 for i in range(10):
     xored_list = [] # list of 10 xored_string
     c_i = cipherlist[i]
     cipherlist_ = cipherlist[:i] + cipherlist[i+1:]
+
     for cipher in cipherlist_:
         xored = cipher_xor(c_i, cipher)
         xored_list.append(xored)
 
     blocks = [] # list of many block, each block contains 10 characters. len(blocks) = len(ci) = len(pi)
-    for j in range(180):
+    for j in range(83):
         block = []
         for xored_string in xored_list:
             if j < len(xored_string):
                 block.append(xored_string[j])
         blocks.append(block)
+
     score_space_plaintext = [] # list of score of each block
     for block in blocks:
         score_space_plaintext.append(score_space(block))
-    # print(score_space_plaintext)
-    for k in range(len(score_space_plaintext)):
-        if score_space_plaintext[k] >= 7:
-            key[k] = cipher_xor(c_i[2*k: 2*k+2], "20")
-print(key)
-# print(bytes(key))
+
+    score_space_plaintexts.append(score_space_plaintext)
+            
+for k in range(83):
+    t = [score[k] for score in score_space_plaintexts]
+    if max(t) >= 6:
+        key[k] = cipher_xor(cipherlist[t.index(max(t))][2*k: 2*k+2], "20")
+    
+# print(key)
 
 target_cipher = "32510ba9babebbbefd001547a810e67149caee11d945cd7fc81a05e9f85aac650e9052ba6a8cd8257bf14d13e6f0a803b54fde9e77472dbff89d71b57bddef121336cb85ccb8f3315f4b52e301d16e9f52f904"
 c = bytes.fromhex(target_cipher)
