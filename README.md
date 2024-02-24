@@ -9,6 +9,10 @@ The general idea behind this assignment is as follows:
 - We can obtain the key by XORing a ciphertext with its corresponding plaintext. By performing frequency analysis on the pairs of XORed ciphers, we can obtain parts of the key.
 
 ## Implementation
+1. The script first XORs each cipher text with every other cipher text and stores these XORed strings in xored_list.
+2. It then divides these XORed strings into “blocks”. Each block contains the characters at the same position in the XORed strings. For example, the first block contains the first characters of all the XORed strings, the second block contains the second characters, and so on. This is done for all positions up to 180 (the length of the longest cipher text).
+3. Each block is then scored based on the likelihood of it being English text. If a block’s score is above a certain threshold (7 in this case), the script assumes that the corresponding character in the key is a space character (ASCII value 32, or “20” in hexadecimal). The key is then updated accordingly.
+
 [Source code](./1.py)
 
 ## Result
